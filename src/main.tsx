@@ -6,9 +6,11 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "react-hot-toast";
 
+const rootElement = document.getElementById("root") as HTMLElement;
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
     <ErrorBoundary>
       <AuthProvider>
         <Toaster position="top-right" reverseOrder={false} />
@@ -17,4 +19,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </ErrorBoundary>
 
   </React.StrictMode >
-);
+  );
+}
+

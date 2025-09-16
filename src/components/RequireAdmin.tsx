@@ -1,6 +1,11 @@
 import { Navigate } from "react-router-dom";
+import { ReactNode } from "react";
 
-export default function RequireAdmin({ children }) {
+interface Props {
+  children: ReactNode | null;;
+}
+
+export default function RequireAdmin({ children }: Props) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
@@ -8,5 +13,5 @@ export default function RequireAdmin({ children }) {
     return <Navigate to="/admin/login" replace />;
   }
 
-  return children;
+  return <>{children}</>;
 }

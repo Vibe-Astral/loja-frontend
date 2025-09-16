@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { Menu, CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
+import { Menu,} from "lucide-react";
 import '../index.css'
 // Importe os componentes do Shadcn/UI que você vai precisar
 import { Button } from "@/components/ui/button";

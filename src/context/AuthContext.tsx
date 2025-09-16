@@ -11,6 +11,7 @@ type UserPayload = {
 
 type AuthContextType = {
   user: UserPayload | null;
+  loading: boolean;
   login: (token: string) => void;
   logout: () => void;
 };
