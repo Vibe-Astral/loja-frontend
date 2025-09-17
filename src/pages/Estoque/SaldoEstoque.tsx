@@ -12,7 +12,7 @@ export default function SaldoEstoque() {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/estoque/saldo", {
+      const res = await axios.get<SaldoProduto[]>("http://localhost:3000/estoque/saldo", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSaldos(res.data);

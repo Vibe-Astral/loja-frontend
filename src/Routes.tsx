@@ -13,9 +13,9 @@ import TechnicianLogin from "./pages/Technician/TechnicianLogin";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 import AdminPortal from "./pages/Admin/AdminPortal";
-import AdminUsers from "@/pages/admin/AdminUsers";
-import AdminLayout from "@/pages/admin/AdminLayout";
-import AdminLogin from "@/pages/admin/AdminLogin";
+import AdminUsers from "@/pages/Admin/AdminUsers";
+import AdminLayout from "@/pages/Admin/AdminLayout";
+import AdminLogin from "@/pages/Admin/AdminLogin";
 import RequireAdmin from "@/components/RequireAdmin";
 import EstoqueTecnico from "@/pages/Technician/EstoqueTecnico";
 import AdminProducts from "@/pages/Admin/AdminProducts";

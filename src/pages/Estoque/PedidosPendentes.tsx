@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/api";
 
 type Produto = {
@@ -29,7 +29,7 @@ export default function PedidosPendentes() {
   const fetchPedidos = async () => {
     try {
       setLoading(true);
-      const data = await apiFetch("/pedidos/pendentes");
+      const data = await apiFetch<Pedido[]>("/pedidos/pendentes");
       setPedidos(data);
     } catch (err) {
       console.error(err);
@@ -49,7 +49,7 @@ export default function PedidosPendentes() {
     novoStatus: "APROVADO" | "REJEITADO"
   ) => {
     try {
-      const result = await apiFetch(`/pedidos/${pedidoId}`, {
+      const result = await apiFetch<Pedido>(`/pedidos/${pedidoId}`, {
         method: "PATCH",
         body: JSON.stringify({ status: novoStatus }),
       });

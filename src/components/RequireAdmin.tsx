@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface Props {
-  children: ReactNode | null;;
+  children: ReactNode;
 }
 
 export default function RequireAdmin({ children }: Props) {

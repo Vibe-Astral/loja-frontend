@@ -1,5 +1,5 @@
 // src/pages/admin/AdminFiliais.tsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/api";
 
 type Filial = {
@@ -26,7 +26,7 @@ export default function AdminFiliais() {
     useEffect(() => {
         async function fetchFiliais() {
             try {
-                const res = await apiFetch("/filiais");
+                const res = await apiFetch<Filial[]>("/filiais");
                 setFiliais(res);
             } catch (err) {
                 console.error("Erro ao carregar filiais:", err);
@@ -38,7 +38,7 @@ export default function AdminFiliais() {
     async function carregarEstoque(filialId: string) {
         try {
             setFilialSelecionada(filialId);
-            const res = await apiFetch(`/filiais/${filialId}/estoque`);
+            const res = await apiFetch<Estoque[]>(`/filiais/${filialId}/estoque`);
 
             setEstoque(res);
         } catch (err) {
@@ -60,8 +60,8 @@ export default function AdminFiliais() {
                         key={f.id}
                         onClick={() => carregarEstoque(f.id)}
                         className={`px-4 py-2 rounded-lg font-semibold transition ${filialSelecionada === f.id
-                                ? "bg-primary text-white"
-                                : "bg-gray-200 hover:bg-gray-300"
+                            ? "bg-primary text-white"
+                            : "bg-gray-200 hover:bg-gray-300"
                             }`}
                     >
                         {f.nome}

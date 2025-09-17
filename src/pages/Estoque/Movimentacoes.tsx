@@ -16,7 +16,7 @@ export default function Movimentacoes() {
 
   const fetchData = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:3000/movimentacoes", {
+    const res = await axios.get<Movimentacao[]>("http://localhost:3000/movimentacoes", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setMovs(res.data);

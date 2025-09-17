@@ -15,7 +15,7 @@ export default function PosicoesEstoque() {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token"); // pegue do login
-      const res = await axios.get("http://localhost:3000/estoque/posicoes", {
+      const res = await axios.get<EstoquePosicao[]>("http://localhost:3000/estoque/posicoes", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosicoes(res.data);

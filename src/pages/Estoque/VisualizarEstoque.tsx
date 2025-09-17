@@ -34,7 +34,9 @@ export default function VisualizarEstoque() {
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [user]);
-
+  if (!user) {
+    return <p className="text-center p-4">Você precisa estar logado para ver o estoque.</p>;
+  }
   if (loading) return <p className="text-center p-4">Carregando estoque...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 

@@ -1,4 +1,4 @@
-export async function apiFetch(path: string, options: RequestInit = {}) {
+export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = localStorage.getItem("token");
 
   const headers: HeadersInit = {
@@ -7,7 +7,7 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
     ...(options.headers || {}),
   };
 
-  const res = await fetch(`http://localhost:3000${path}`, {
+  const res = await fetch(import.meta.env.VITE_API_URL + path, {
     ...options,
     headers,
   });
@@ -17,5 +17,5 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
     throw new Error(JSON.stringify(error));
   }
 
-  return res.json();
+  return res.json() as Promise<T>;
 }

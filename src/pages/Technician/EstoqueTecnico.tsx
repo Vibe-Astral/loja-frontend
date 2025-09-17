@@ -30,8 +30,8 @@ export default function EstoqueTecnico() {
     async function fetchData() {
       try {
         const [estoqueData, filiaisData] = await Promise.all([
-          apiFetch("/estoque/tecnico/me"),
-          apiFetch("/filiais"),
+          apiFetch<EstoqueItem[]>("/estoque/tecnico/me"),
+          apiFetch<Filial[]>("/filiais"),
         ]);
         setEstoque(estoqueData);
         setFiliais(filiaisData);
@@ -43,6 +43,7 @@ export default function EstoqueTecnico() {
     }
     fetchData();
   }, []);
+
 
   const handleDevolucao = async (produtoId: string) => {
     if (!selectedFilial) {
@@ -60,7 +61,7 @@ export default function EstoqueTecnico() {
         }),
       });
       alert("Devolução solicitada com sucesso!"); // 🔜 trocar por toast
-      const data = await apiFetch("/estoque/tecnico/me");
+      const data = await apiFetch<EstoqueItem[]>("/estoque/tecnico/me");
       setEstoque(data);
     } catch (err) {
       console.error(err);

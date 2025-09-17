@@ -31,6 +31,7 @@ export default function AdminLogin() {
       window.location.href = "/admin"; // redireciona para o portal
     } catch (err) {
       alert("Falha no login");
+      console.log("Falha no login", err)
     }
   };
 

@@ -1,5 +1,5 @@
+import React, { type ReactNode } from "react";
 
-import type { ReactNode } from "react";
 interface ErrorBoundaryProps {
   children: ReactNode;
 }
@@ -17,7 +17,7 @@ class ErrorBoundary extends React.Component<
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(): ErrorBoundaryState {
     return { hasError: true };
   }
 

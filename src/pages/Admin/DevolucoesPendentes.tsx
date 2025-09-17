@@ -26,7 +26,7 @@ export default function DevolucoesPendentes() {
 
   const fetchDevolucoes = async () => {
     try {
-      const data = await apiFetch("/pedidos/devolucoes/pendentes");
+      const data = await apiFetch<Pedido[]>("/pedidos/devolucoes/pendentes");
       setPedidos(data);
     } catch (err) {
       console.error(err);

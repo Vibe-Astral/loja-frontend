@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
+import { type ReactElement } from "react";
 
 interface ProtectedRouteProps {
-  children: JSX.Element;
+  children: ReactElement;
   allowedRoles?: string[];
 }
-
 export default function ProtectedRoute({
   children,
   allowedRoles,

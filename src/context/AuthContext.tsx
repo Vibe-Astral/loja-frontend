@@ -5,8 +5,8 @@ type UserPayload = {
   sub: string;       // userId
   email: string;
   role: string;
-  filialId?: string; // opcional, se o user estiver vinculado
-  exp: number;       // expiração do token
+  filialId?: string; // opcional
+  exp: number;       // expiração do token (em segundos)
 };
 
 type AuthContextType = {
@@ -20,6 +20,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserPayload | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Ler token do localStorage ao iniciar
   useEffect(() => {
@@ -36,6 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem("token");
       }
     }
+    setLoading(false); // termina o carregamento
   }, []);
 
   const login = (token: string) => {
@@ -50,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
