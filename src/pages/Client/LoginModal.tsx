@@ -10,9 +10,11 @@ const schema = z.object({
 
 // 2. Tipos derivados do Zod
 type FormData = z.infer<typeof schema>;
-
+interface LoginModalProps {
+    onClose: () => void;
+}
 // 3. O componente do modal
-export default function LoginModal({ onClose }) {
+export default function LoginModal({ onClose }: LoginModalProps) {
     const {
         register,
         handleSubmit,

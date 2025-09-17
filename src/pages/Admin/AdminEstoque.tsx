@@ -42,10 +42,10 @@ export default function AdminEstoque() {
   // Carregar filiais e técnicos
   useEffect(() => {
     async function loadData() {
-      const filiaisRes = await apiFetch("/filiais");
+      const filiaisRes = await apiFetch<Filial[]>("/filiais");
       setFiliais(filiaisRes);
 
-      const tecnicosRes = await apiFetch("/users");
+      const tecnicosRes = await apiFetch<User[]>("/users");
       setTecnicos(tecnicosRes.filter((u: User) => u.role === "TECNICO"));
     }
     loadData();
@@ -54,7 +54,7 @@ export default function AdminEstoque() {
   // Carregar estoque da filial selecionada
   useEffect(() => {
     if (selectedFilial) {
-      apiFetch(`/estoque/filial/${selectedFilial}`).then(setEstoque);
+      apiFetch<EstoqueItem[]>(`/estoque/filial/${selectedFilial}`).then(setEstoque);
     }
   }, [selectedFilial]);
 
@@ -78,7 +78,7 @@ export default function AdminEstoque() {
       setShowModal(false);
       setTransferData({ produtoId: "", tecnicoId: "", quantidade: 1 });
       if (selectedFilial) {
-        apiFetch(`/estoque/filial/${selectedFilial}`).then(setEstoque);
+        apiFetch<EstoqueItem[]>(`/estoque/filial/${selectedFilial}`).then(setEstoque);
       }
     } catch (err) {
       console.error(err);
