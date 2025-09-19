@@ -24,7 +24,7 @@ export default function TechnicianLogin() {
   // 2. Função de login
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await fetch("http://localhost:3000/auth/login", {
+      const res = await fetch("https://loja-backend-4gnm.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

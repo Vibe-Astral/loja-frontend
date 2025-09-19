@@ -7,14 +7,17 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
     ...(options.headers || {}),
   };
 
-  const res = await fetch(import.meta.env.VITE_API_URL + path, {
+  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+  const url = `${baseUrl}${path.startsWith("/") ? path : "/" + path}`;
+
+  const res = await fetch(url, {
     ...options,
     headers,
   });
 
   if (!res.ok) {
     const error = await res.json().catch(() => ({}));
-    throw new Error(JSON.stringify(error));
+    throw new Error(error.message || "Erro na requisição");
   }
 
   return res.json() as Promise<T>;
