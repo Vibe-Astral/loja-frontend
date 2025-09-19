@@ -32,7 +32,7 @@ export default function FormAuth() {
     });
     const onSubmit = async (data: FormData) => {
         try {
-            const res = await fetch("http://localhost:3000/auth/signup", {
+            const res = await fetch("https://loja-backend-4gnm.onrender.com/auth/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -48,7 +48,7 @@ export default function FormAuth() {
             console.log("Usuário criado:", result);
             const token = localStorage.getItem("token");
 
-            await fetch("http://localhost:3000/users/me", {
+            await fetch("https://loja-backend-4gnm.onrender.com/users/me", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

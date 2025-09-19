@@ -55,7 +55,7 @@ export function Navbar() {
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="mr-6 flex items-center space-x-2">
           {/* O nome da marca em branco ou em uma cor que contraste bem */}
-          <span className="font-bold p-3 text-accent">LUIS TEC</span>
+          <span className="font-bold p-3 text-accent">LUIZ TEC</span>
         </Link>
 
         {/* == 1. NAVEGAÇÃO PARA DESKTOP == */}

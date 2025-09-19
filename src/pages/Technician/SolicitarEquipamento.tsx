@@ -24,7 +24,7 @@ export default function SolicitarEquipamento() {
           return;
         }
 
-        const res = await fetch("http://localhost:3000/produtos", {
+        const res = await fetch("https://loja-backend-4gnm.onrender.com/produtos", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -52,7 +52,7 @@ export default function SolicitarEquipamento() {
         return;
       }
 
-      const res = await fetch("http://localhost:3000/pedidos", {
+      const res = await fetch("https://loja-backend-4gnm.onrender.com/pedidos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

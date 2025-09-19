@@ -15,7 +15,7 @@ export default function ClientDashboard() {
           return;
         }
 
-        const res = await fetch("http://localhost:3000/users/me", {
+        const res = await fetch("https://loja-backend-4gnm.onrender.com/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

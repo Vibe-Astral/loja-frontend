@@ -16,7 +16,7 @@ export default function Movimentacoes() {
 
   const fetchData = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get<Movimentacao[]>("http://localhost:3000/movimentacoes", {
+    const res = await axios.get<Movimentacao[]>("https://loja-backend-4gnm.onrender.com/movimentacoes", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setMovs(res.data);
@@ -30,7 +30,7 @@ export default function Movimentacoes() {
     e.preventDefault();
     const token = localStorage.getItem("token");
     await axios.post(
-      "http://localhost:3000/movimentacoes/entrada",
+      "https://loja-backend-4gnm.onrender.com/movimentacoes/entrada",
       { produtoId, quantidade, destinoFilialId: "<uuid-da-filial>" },
       { headers: { Authorization: `Bearer ${token}` } }
     );

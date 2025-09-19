@@ -53,6 +53,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         >
+          <Route index element={<EstoqueTecnico />} /> {/* default ao entrar em /tecnico */}
           <Route path="estoque" element={<EstoqueTecnico />} />
           <Route path="solicitar" element={<SolicitarEquipamento />} />
           {/* já preparado para futuras páginas */}
