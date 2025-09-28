@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/api";
+import toast from "react-hot-toast";
 
 interface Produto {
   id: string;
@@ -15,7 +16,7 @@ interface EstoqueItem {
 interface Tecnico {
   id: string;
   email: string;
-  role: string; // adicionei pq você filtra por isso
+  role: string;
 }
 
 export default function AdminEstoqueTecnico() {
@@ -27,25 +28,33 @@ export default function AdminEstoqueTecnico() {
   // Carregar lista de técnicos
   useEffect(() => {
     async function loadTecnicos() {
-      const res = await apiFetch<Tecnico[]>("/users");
-      setTecnicos(res.filter((u) => u.role === "TECNICO"));
+      try {
+        const res = await apiFetch<Tecnico[]>("/users");
+        setTecnicos(res.filter((u) => u.role === "TECNICO"));
+      } catch (err) {
+        console.error(err);
+        toast.error("Erro ao carregar técnicos");
+      }
     }
     loadTecnicos();
   }, []);
 
+  // Carregar estoque do técnico selecionado
   useEffect(() => {
-    if (selectedTecnico) {
-      setLoading(true)
-      apiFetch<EstoqueItem[]>(`/estoque/tecnico/${selectedTecnico}`)
-        .then(setEstoque);
-    }
+    if (!selectedTecnico) return;
+    setLoading(true);
+
+    apiFetch<EstoqueItem[]>(`/estoque/tecnico/${selectedTecnico}`)
+      .then(setEstoque)
+      .catch((err) => {
+        console.error(err);
+        toast.error("Erro ao carregar estoque do técnico");
+      })
+      .finally(() => setLoading(false));
   }, [selectedTecnico]);
-
-
 
   return (
     <div className="p-6 bg-white rounded shadow">
-
       <h1 className="text-2xl font-bold mb-4">Estoque de Técnico</h1>
 
       {/* Selecionar técnico */}
@@ -69,7 +78,7 @@ export default function AdminEstoqueTecnico() {
       {selectedTecnico && (
         <>
           {loading ? (
-            <p>Carregando estoque...</p>
+            <p className="text-gray-500">Carregando estoque...</p>
           ) : estoque.length > 0 ? (
             <table className="w-full border-collapse border text-sm">
               <thead>
@@ -88,7 +97,7 @@ export default function AdminEstoqueTecnico() {
               </tbody>
             </table>
           ) : (
-            <p>Nenhum item encontrado.</p>
+            <p className="text-gray-500">Nenhum item encontrado.</p>
           )}
         </>
       )}

@@ -52,9 +52,13 @@ export default function Home() {
                 delaySpeed={1500}
               />
             </p>
-            <button className="bg-accent text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-500 transition">
-              Solicitar Atendimento
-            </button>
+            <a
+            href="https://wa.me/5511976317902"
+            target="_blank"
+            className="bg-accent text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-500 transition"
+          >
+            Solicitar Atendimento
+          </a>
           </div>
         </section>
 
@@ -149,7 +153,7 @@ export default function Home() {
             Precisa consertar seu celular?
           </h2>
           <a
-            href="https://wa.me/5599999999999"
+            href="https://wa.me/5511976317902"
             target="_blank"
             className="bg-accent text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-500 transition"
           >

@@ -49,15 +49,19 @@ export default function PedidosPendentes() {
     novoStatus: "APROVADO" | "REJEITADO"
   ) => {
     try {
-      const result = await apiFetch<Pedido>(`/pedidos/${pedidoId}`, {
-        method: "PATCH",
-        body: JSON.stringify({ status: novoStatus }),
-      });
+      let result: Pedido;
 
-      // 👇 pega o status retornado pelo backend
+      if (novoStatus === "APROVADO") {
+        result = await apiFetch<Pedido>(`/pedidos/${pedidoId}/aprovar`, {
+          method: "PATCH",
+        });
+      } else {
+        result = await apiFetch<Pedido>(`/pedidos/${pedidoId}/rejeitar`, {
+          method: "PATCH",
+        });
+      }
+
       setMensagem(`✅ Pedido ${result.status} com sucesso!`);
-
-      // recarregar lista
       fetchPedidos();
     } catch (err) {
       console.error(err);

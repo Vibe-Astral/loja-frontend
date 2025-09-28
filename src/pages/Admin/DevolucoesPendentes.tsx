@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/api";
+import toast from "react-hot-toast";
 
 type Produto = {
   id: string;
@@ -30,7 +31,7 @@ export default function DevolucoesPendentes() {
       setPedidos(data);
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar devoluções");
+      toast.error("Erro ao carregar devoluções");
     }
   };
 
@@ -48,7 +49,7 @@ export default function DevolucoesPendentes() {
       fetchDevolucoes();
     } catch (err) {
       console.error(err);
-      alert("Erro ao atualizar devolução");
+      toast.error("Erro ao atualizar devolução");
     }
   };
 

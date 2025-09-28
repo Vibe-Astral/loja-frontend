@@ -104,7 +104,7 @@ export function Navbar() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link to="/about" className="p-2">
+                <Link to="/sobre" className="p-2">
                   <NavigationMenuLink
                     className={cn(
                       navigationMenuTriggerStyle(),
@@ -163,7 +163,7 @@ export function Navbar() {
                   </AccordionItem>
                 </Accordion>
                 <Link
-                  to="/About"
+                  to="/sobre"
                   className="font-medium p-2 hover:bg-[#ce711e] hover:text-[#1a2730]"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

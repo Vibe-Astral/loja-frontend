@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners"; // loader simples
 
 const schema = z.object({
   email: z.string().email("Email inválido"),
@@ -14,8 +17,12 @@ export default function AdminLogin() {
     resolver: zodResolver(schema),
   });
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (data: FormData) => {
     try {
+      setLoading(true);
+
       const res = await fetch("https://loja-backend-4gnm.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,10 +35,13 @@ export default function AdminLogin() {
       localStorage.setItem("token", result.access_token);
       localStorage.setItem("role", "ADMIN");
 
-      window.location.href = "/admin"; // redireciona para o portal
+      toast.success("Login realizado com sucesso!");
+      window.location.href = "/admin"; // redireciona
     } catch (err) {
-      alert("Falha no login");
-      console.log("Falha no login", err)
+      console.error("Falha no login", err);
+      toast.error("Falha no login. Verifique suas credenciais.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,6 +59,7 @@ export default function AdminLogin() {
             type="email"
             {...register("email")}
             className="w-full border p-2 rounded"
+            disabled={loading}
           />
           {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
         </div>
@@ -59,15 +70,21 @@ export default function AdminLogin() {
             type="password"
             {...register("password")}
             className="w-full border p-2 rounded"
+            disabled={loading}
           />
           {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
         </div>
 
         <button
           type="submit"
-          className="w-full bg-primary text-white py-2 rounded-lg font-bold"
+          disabled={loading}
+          className={`w-full py-2 rounded-lg font-bold flex items-center justify-center ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-primary text-white hover:bg-blue-700"
+          }`}
         >
-          Entrar
+          {loading ? <ClipLoader size={20} color="#fff" /> : "Entrar"}
         </button>
       </form>
     </div>

@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 import type { ReactNode } from "react";
 
 interface Props {
@@ -6,10 +7,11 @@ interface Props {
 }
 
 export default function RequireAdmin({ children }: Props) {
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
+  const { user, loading } = useAuth();
 
-  if (!token || role !== "ADMIN") {
+  if (loading) return <p>Carregando...</p>;
+
+  if (!user || user.role !== "ADMIN") {
     return <Navigate to="/admin/login" replace />;
   }
 

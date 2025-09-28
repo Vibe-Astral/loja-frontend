@@ -8,7 +8,8 @@ export default function AdminLayout() {
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
       <aside className="w-64 bg-gray-900 text-gray-100 p-6 flex flex-col">
-        <h2 className="text-2xl font-bold mb-8 text-blue-400">ERP Admin</h2>
+        
+        <Link to="/admin" className="text-2xl font-bold mb-8 text-blue-400">ERP Luiz Tec</Link>
 
         <nav className="space-y-4">
           <Link to="/admin/usuarios" className="block hover:text-blue-400">

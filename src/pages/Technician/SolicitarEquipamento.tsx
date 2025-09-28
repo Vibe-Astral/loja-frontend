@@ -1,15 +1,18 @@
 // src/pages/Technician/SolicitarEquipamento.tsx
 import React, { useEffect, useState } from "react";
 
-type Produto = {
-  id: string;
-  nome: string;
-  preco: number;
-  fornecedor: string;
+type ProdutoDisponivel = {
+  produto: {
+    id: string;
+    nome: string;
+    preco: number;
+    fornecedor: string;
+  };
+  quantidade: number;
 };
 
 export default function SolicitarEquipamento() {
-  const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [produtos, setProdutos] = useState<ProdutoDisponivel[]>([]);
   const [produtoId, setProdutoId] = useState("");
   const [quantidade, setQuantidade] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -19,21 +22,25 @@ export default function SolicitarEquipamento() {
     const fetchProdutos = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) {
+        const filialId = localStorage.getItem("filialId"); // 🔑 precisa estar salvo no login
+        if (!token || !filialId) {
           setMensagem("Você precisa estar logado!");
           return;
         }
 
-        const res = await fetch("https://loja-backend-4gnm.onrender.com/produtos", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetch(
+          `https://loja-backend-4gnm.onrender.com/estoque/disponiveis/${filialId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-        if (!res.ok) throw new Error("Erro ao carregar produtos");
+        if (!res.ok) throw new Error("Erro ao carregar produtos disponíveis");
         const data = await res.json();
         setProdutos(data);
       } catch (err) {
         console.error(err);
-        setMensagem("Erro ao carregar lista de produtos");
+        setMensagem("Erro ao carregar lista de produtos disponíveis");
       }
     };
 
@@ -91,10 +98,11 @@ export default function SolicitarEquipamento() {
             className="w-full border px-3 py-2 rounded"
             required
           >
-            <option value="">Selecione um produto</option>
-            {produtos.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.nome} — R$ {p.preco.toFixed(2)}
+            <option value="">Selecione um produto disponível</option>
+            {produtos.map((item) => (
+              <option key={item.produto.id} value={item.produto.id}>
+                {item.produto.nome} — R$ {item.produto.preco.toFixed(2)} (Disp:{" "}
+                {item.quantidade})
               </option>
             ))}
           </select>
@@ -106,6 +114,11 @@ export default function SolicitarEquipamento() {
           <input
             type="number"
             min={1}
+            max={
+              produtoId
+                ? produtos.find((p) => p.produto.id === produtoId)?.quantidade || 1
+                : 1
+            }
             value={quantidade}
             onChange={(e) => setQuantidade(Number(e.target.value))}
             className="w-full border px-3 py-2 rounded"

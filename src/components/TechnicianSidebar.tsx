@@ -1,43 +1,42 @@
 // src/components/TechnicianSidebar.tsx
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function TechnicianSidebar() {
+  const baseClasses =
+    "block px-4 py-2 rounded hover:bg-blue-100 transition font-medium";
+  const activeClasses = "bg-blue-600 text-white hover:bg-blue-700";
+
   return (
-    <aside className="w-64 bg-gray-900 text-white flex flex-col">
-      <div className="px-6 py-4 font-bold text-xl border-b border-gray-700">
-        Técnico
-      </div>
-      <nav className="flex-1 p-4 space-y-2">
-        <Link
+    <aside className="w-64 bg-white shadow-md min-h-screen p-4">
+      <h2 className="text-xl font-bold mb-6 text-blue-700">Portal Técnico</h2>
+      <nav className="space-y-2">
+        <NavLink
           to="/tecnico/estoque"
-          className="block px-4 py-2 rounded hover:bg-gray-700"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClasses : "text-gray-700"}`
+          }
         >
           📦 Meu Estoque
-        </Link>
-        <Link
+        </NavLink>
+
+        <NavLink
           to="/tecnico/solicitar"
-          className="block px-4 py-2 rounded hover:bg-gray-700"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClasses : "text-gray-700"}`
+          }
         >
           🛠 Solicitar Equipamento
-        </Link>
-        <button
-          disabled
-          className="block w-full text-left px-4 py-2 rounded opacity-50 cursor-not-allowed"
+        </NavLink>
+
+        <NavLink
+          to="/tecnico/pedidos"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClasses : "text-gray-700"}`
+          }
         >
-          📋 Ordens de Serviço (em breve)
-        </button>
+          🧾 Meus Pedidos
+        </NavLink>
       </nav>
-      <div className="p-4 border-t border-gray-700 text-sm">
-        <button
-          onClick={() => {
-            localStorage.removeItem("token");
-            window.location.href = "/tecnico/portal";
-          }}
-          className="w-full px-4 py-2 bg-red-600 rounded hover:bg-red-700"
-        >
-          Sair
-        </button>
-      </div>
     </aside>
   );
 }

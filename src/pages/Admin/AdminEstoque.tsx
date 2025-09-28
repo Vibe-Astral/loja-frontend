@@ -1,6 +1,7 @@
 // src/pages/admin/AdminEstoque.tsx
 import { useEffect, useState } from "react";
 import { apiFetch } from "@/utils/api";
+import toast from "react-hot-toast";
 
 interface Produto {
   id: string;
@@ -60,7 +61,7 @@ export default function AdminEstoque() {
 
   const handleTransfer = async () => {
     if (!transferData.tecnicoId) {
-      alert("Selecione um técnico de destino.");
+      toast.error("Selecione um técnico de destino.");
       return;
     }
 
@@ -74,7 +75,7 @@ export default function AdminEstoque() {
           quantidade: transferData.quantidade,
         }),
       });
-      alert("Transferência realizada!");
+      toast.success("Transferência realizada!");
       setShowModal(false);
       setTransferData({ produtoId: "", tecnicoId: "", quantidade: 1 });
       if (selectedFilial) {
@@ -82,7 +83,7 @@ export default function AdminEstoque() {
       }
     } catch (err) {
       console.error(err);
-      alert("Erro ao transferir produto");
+      toast.error("Erro ao transferir produto");
     }
   };
 

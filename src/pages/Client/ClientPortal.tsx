@@ -12,8 +12,8 @@ export default function ClientPortal() {
             Portal do Cliente
           </h1>
           <p className="text-center text-gray-600 mb-8">
-            Aqui você acompanha suas <span className="font-semibold">ordens de serviço</span>, 
-            conversa diretamente com um consultor e mantém o histórico dos seus reparos em um só lugar.  
+            Aqui você acompanha suas <span className="font-semibold">ordens de serviço</span>,
+            conversa diretamente com um consultor e mantém o histórico dos seus reparos em um só lugar.
           </p>
 
           {/* Benefícios */}
@@ -37,11 +37,14 @@ export default function ClientPortal() {
               </p>
             </div>
           </div>
+          <div className="w-full bg-yellow-100 border border-yellow-300 text-yellow-800 text-sm font-medium px-4 py-2 rounded-md mb-4 text-center">
+            🚧 Este recurso ainda não está em funcionamento.
+          </div>
 
           {/* Call to Action */}
           <div className="text-center space-y-6">
             <Link
-              to="/client/portal/auth"
+              to="/client/portal"
               className="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-600 transition"
             >
               Cadastrar / Logar
@@ -49,7 +52,7 @@ export default function ClientPortal() {
 
             <div>
               <a
-                href="https://wa.me/5599999999999"
+                href="https://wa.me/5511976317902"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-600 transition"
