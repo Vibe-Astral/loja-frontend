@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Routes from "./Routes";
+import AppRoutes from "./Routes";
 import "./index.css";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthProvider } from "@/context/AuthContext";
@@ -14,7 +14,7 @@ if (rootElement) {
     <ErrorBoundary>
       <AuthProvider>
         <Toaster position="top-right" reverseOrder={false} />
-        <Routes />
+        <AppRoutes />
       </AuthProvider>
     </ErrorBoundary>
 

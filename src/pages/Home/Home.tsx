@@ -2,7 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Typewriter } from "react-simple-typewriter";
 
 // Imports das imagens
-import bgll from "@/assets/conserto.jpg";
+import bgll from "@/assets/conserto.webp";
 import SamsungLogo from "@/assets/Samsung_Logo.svg.png";
 import AppleLogo from "@/assets/Apple_logo_black.svg.png";
 import XiaomiLogo from "@/assets/Xiaomi_logo_2021.svg.webp";

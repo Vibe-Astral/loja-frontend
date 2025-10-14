@@ -43,7 +43,12 @@ const acess: { title: string; href: string; description: string }[] = [
     href: "/tecnico/portal",
     description:
       "Area de Acesso para tecnicos cadastrados",
-  },
+  },{
+    title: "Área Do Consultor",
+    href: "/consultor/portal",
+    description:
+      "Area de Acesso para consultores cadastrados",
+  }
 ]
 
 export function Navbar() {

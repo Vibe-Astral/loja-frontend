@@ -31,7 +31,11 @@ import DevolucoesPendentes from "./pages/Admin/DevolucoesPendentes";
 import About from "./pages/About/About";
 import MeusPedidos from "./pages/Technician/MeusPedidos";
 import AdminVincularTecnico from "./pages/Admin/AdminVincularTecnico";
-
+import ConsultorLayout from "./pages/consultor/ConsultorLayout";
+import ConsultorPortal from "./pages/consultor/ConsultorPortal";
+import ConsultorLogin from "./pages/consultor/ConsultorLogin";
+import ConsultorVendas from "./pages/consultor/ConsultorVendas";
+import ConsultorRelatorios from "./pages/consultor/ConsultorRelatorios";
 const AppRoutes = () => {
   return (
     <Router>
@@ -43,6 +47,23 @@ const AppRoutes = () => {
         <Route path="/client/portal" element={<ClientPortal />} />
         <Route path="/client/portal/auth" element={<FormAuth />} />
         <Route path="/client/dashboard" element={<ClientDashboard />} />
+
+        {/* Consultor */}
+        <Route path="/consultor/portal" element={<ConsultorPortal />} />
+        <Route path="/consultor/login" element={<ConsultorLogin />} />
+
+        <Route
+          path="/consultor"
+          element={
+            <ProtectedRoute allowedRoles={["CONSULTOR", "ADMIN"]} redirectTo="/consultor/login">
+              <ConsultorLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="clientes" element={<p>👥 Clientes (em breve)</p>} />
+          <Route path="vendas" element={<ConsultorVendas/>}/>
+          <Route path="relatorios" element={<ConsultorRelatorios />} />
+        </Route>
 
         {/* Técnico */}
         <Route path="/tecnico/portal" element={<TechnicianPortal />} />
