@@ -27,7 +27,6 @@ export default function TechnicianSidebar() {
         >
           🛠 Solicitar Equipamento
         </NavLink>
-
         <NavLink
           to="/tecnico/pedidos"
           className={({ isActive }) =>
@@ -35,6 +34,14 @@ export default function TechnicianSidebar() {
           }
         >
           🧾 Meus Pedidos
+        </NavLink>
+        <NavLink
+          to="/tecnico/ordens"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClasses : "text-gray-700"}`
+          }
+        >
+          🧾 Ordens De Serviço
         </NavLink>
       </nav>
     </aside>

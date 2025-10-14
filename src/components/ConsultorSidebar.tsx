@@ -36,6 +36,14 @@ export default function ConsultorSidebar() {
         >
           📊 Relatórios
         </NavLink>
+        <NavLink
+          to="/consultor/ordens"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClasses : "text-gray-700"}`
+          }
+        >
+          📊 Ordens
+        </NavLink>
       </nav>
     </aside>
   );
